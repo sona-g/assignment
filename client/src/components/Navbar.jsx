@@ -17,7 +17,7 @@ const Navbar = () => {
           root();
     }, [])
 
-    console.log(menu)
+    //console.log(menu)
 
     return (
         <div className='nav-area'>

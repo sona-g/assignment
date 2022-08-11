@@ -17,25 +17,25 @@ const MenuItems = ({ items }) => {
         const directory = async () => {
             await fetch(url)
                 .then(res => res.json())
-                .then(data => setDir(data.entries))
+                .then(data => setDir(data))
                 .catch(err => console.error('error:' + err))
         };
         directory();
     }, [])
 
-    console.log(dir)
+    //console.log(dir)
 
     useEffect(() => {
         const directory = async () => {
             await fetch(secondUrl)
                 .then(res => res.json())
-                .then(data => setSecondDir(data.entries))
+                .then(data => setSecondDir(data))
                 .catch(err => console.error('error:' + err))
         };
         directory();
     }, [])
 
-    console.log(secondDir)
+    //console.log(secondDir)
 
     useEffect(() => {
         const directory = async () => {
@@ -47,7 +47,7 @@ const MenuItems = ({ items }) => {
         directory();
     }, [])
 
-    console.log(subDir)
+    //console.log(subDir)
 
     let ref = useRef();
 
@@ -74,8 +74,9 @@ const MenuItems = ({ items }) => {
     };
 
     return (
+        <>
         <li className='menu-items' ref={ref} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
-            {items.type  === 'directory' ? (
+            {items.type === 'directory' ? (
                 <>
                     <Link role='button' to='/' aria-haspopup='menu'
                     aria-expanded={dropdown ? 'true' : 'false'} onClick={() => setDropdown((prev) => (!prev))}>
@@ -87,6 +88,17 @@ const MenuItems = ({ items }) => {
                 <Link to='/'>{items.name}</Link>
             )}
         </li>
+        {/* <li className='menu-items' ref={ref} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+        {dir.type === 'directory' && (
+            <>
+                <Link role='button' to='/' aria-haspopup='menu'
+                aria-expanded={dropdown ? 'true' : 'false'} onClick={() => setDropdown((prev) => (!prev))}>
+                    {subDir.name}{" "}
+                </Link>
+            </>
+        )}
+    </li> */}
+    </>
     );
 };
 
