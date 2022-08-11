@@ -1,0 +1,10 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory `/Users/sonakshi/Documents/GitHub/assignment'
+docker build -t react-assessment-01:latest .
+docker run -it \
+		--publish 8080:8080 \
+		--volume $(pwd)/server.json:/app/server.json \
+		--volume $(pwd)/routes.json:/app/routes.json \
+		react-assessment-01:latest
+make: Leaving directory `/Users/sonakshi/Documents/GitHub/assignment'
+ 
