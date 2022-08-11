@@ -1,32 +1,63 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-// import MenuItems from './MenuItems';
+import React, {useState, useEffect } from 'react';
+// import { Link } from 'react-router-dom';
+import MenuItems from './MenuItems';
+import SubDropdown from './SubDropdown';
 
-const Dropdown = ({ firstSubmenu, subDir, secondSubmenu, items, dropdown }) => {
+const Dropdown = ({ items, dropdown, ref, onMouseEnter, onMouseLeave, setDropdown, depthLevel }) => {
     //console.log(items)
+
+    const [dir, setDir] = useState([]);
+    const [secondDir, setSecondDir] = useState([]);
+    
+    const url = '/fs?path=directory-1';
+    const secondUrl = '/fs?path=directory-2';
+   
+
+    useEffect(() => {
+        const directory = async () => {
+            await fetch(url)
+                .then(res => res.json())
+                .then(data => setDir(data))
+                .catch(err => console.error('error:' + err))
+        };
+        directory();
+    }, [])
+
+    //console.log(dir)
+
+    useEffect(() => {
+        const directory = async () => {
+            await fetch(secondUrl)
+                .then(res => res.json())
+                .then(data => setSecondDir(data))
+                .catch(err => console.error('error:' + err))
+        };
+        directory();
+    }, [])
+
+    //console.log(secondDir)
+
+    depthLevel = depthLevel + 1;
+    const dropdownClass = depthLevel > 1 ? "dropdown-submenu" : "";
+
     return (
-        <ul className={`dropdown ${dropdown ? "show" : ""}`}>
-            { items.name === firstSubmenu.id &&
-            firstSubmenu.entries.map(( submenu, i) => (
-                <li key={i} className='menu-items'>
-                    <Link to='/'>{submenu.name}</Link>
-                </li>
+        <ul className={`dropdown ${dropdownClass} ${dropdown ? "show" : ""}`}>
+            <li className='menu-items' ref={ref} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+            { items.name === dir.id && 
+                <>
+                {dir.entries.map(( submenu, j) => (
+                <MenuItems items={submenu} key={j} onClick={() => setDropdown((prev) => (!prev))} aria-haspopup='menu'
+                aria-expanded={dropdown ? 'true' : 'false'}/>
+                ))}
+                <SubDropdown dropdown={dropdown} dir={dir}/>
+                </>
+            }
+            { items.name === secondDir.id &&
+            secondDir.entries.map(( submenu, j) => (
+                <MenuItems items={submenu} key={j} />
                 ))
             }
-            { items.name === secondSubmenu.id &&
-            secondSubmenu.entries.map(( submenu, j) => (
-                <li key={j} className='menu-items'>
-                    <Link to='/'>{submenu.name}</Link>
-                </li>
-                ))
-            }
-            {/* { firstSubmenu.name === 'directory-1a' &&
-            subDir.map(( submenu, l) => (
-                <li key={l} className='menu-items'>
-                    <Link to='/'>{submenu.name}</Link>
-                </li>
-                ))
-            } */}
+            </li>
         </ul>
     );
 };

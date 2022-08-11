@@ -18,13 +18,13 @@ const Navbar = () => {
     }, [])
 
     //console.log(menu)
-
+    const depthLevel = 0;
     return (
         <div className='nav-area'>
         <Link to='/' className='logo'>LOGO</Link>
             <ul className='menus'>
             {menu.map((main) => (
-                <MenuItems items={main} key={main.type} />
+                <MenuItems items={main} key={main.type} depthLevel={depthLevel}/>
             ))}
             </ul>
         </div>
