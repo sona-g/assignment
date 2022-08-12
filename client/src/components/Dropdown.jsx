@@ -63,7 +63,7 @@ const Dropdown = ({ items, dropdown, setDropdown, depthLevel }) => {
                 <>
                 <MenuItems items={submenu} key={j} onClick={() => showModal}/>
                 {showModal && (
-                    <Modal secondDir={secondDir} showModal={showModal} setShowModal={setShowModal}/>
+                    <Modal showModal={showModal} setShowModal={setShowModal}/>
                 )}
                 
                 </>
