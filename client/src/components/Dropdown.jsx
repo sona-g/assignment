@@ -1,5 +1,5 @@
 import React, {useState, useEffect } from 'react';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import MenuItems from './MenuItems';
 import Modal from './Modal';
 import SubDropdown from './SubDropdown';
@@ -49,9 +49,11 @@ const Dropdown = ({ items, dropdown, setDropdown, depthLevel }) => {
             { items.name === "directory-1" && 
                 <>
                 {dir.map(( submenu, j) => (
-                <MenuItems items={submenu} key={j} 
-                onClick={() => setDropdown((prev) => (!prev))} 
-                />
+                    <Link role="button" to='/' aria-haspopup='menu'
+                    aria-expanded={dropdown ? 'true' : 'false'} onClick={() => setDropdown((prev) => (!prev))} key={j}>
+                        {submenu.name}
+                        <span>&raquo;</span>
+                        </Link>
                 ))}
                 <SubDropdown dropdown={dropdown} dir={dir}/>
                 </>

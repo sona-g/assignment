@@ -40,9 +40,9 @@ const MenuItems = ({ items, depthLevel }) => {
                     <Link role='button' to='/' aria-haspopup='menu'
                     aria-expanded={dropdown ? 'true' : 'false'} onClick={() => setDropdown((prev) => (!prev))}>
                         {items.name}{" "}
-                        {depthLevel > 0 ? <span>&raquo;</span> : <span className="arrow" />}
+                     <span className="arrow" />
                     </Link>
-                    <Dropdown dropdown={dropdown} items={items} setDropdown={setDropdown}/>
+                    <Dropdown dropdown={dropdown} items={items} setDropdown={setDropdown} depthLevel={depthLevel}/>
                 </>
             ) : (
                 <Link to='/'>{items.name}</Link>

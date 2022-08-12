@@ -15,16 +15,16 @@ const SubDropdown = ({ dropdown, dir }) => {
         directory();
     }, [])
 
-  console.log(subDir)
+  //console.log(subDir)
+
     return (
         <ul className={`dropdown ${dropdown ? "show" : ""}`}>
-            { dir.name === 'directory-1a'  &&
-            subDir.map(( submenu, l) => (
-                <li key={l} className='menu-items'>
-                    <Link to='/'>{submenu.name}</Link>
-                </li>
+            <li className='menu-items'>
+            {subDir.map(( submenu, l) => (
+                    <Link role="button" to='/' key={l}>{submenu.name}</Link>
                 ))
             }
+            </li>
        </ul>
     );
 };
