@@ -32,7 +32,9 @@ const MenuItems = ({ items, depthLevel }) => {
 
     return (
         <>
-        <li className='menu-items' ref={ref} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+        <li className='menu-items' ref={ref} 
+        onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}
+        >
             {items.type === 'directory' ? (
                 <>
                     <Link role='button' to='/' aria-haspopup='menu'
@@ -40,8 +42,7 @@ const MenuItems = ({ items, depthLevel }) => {
                         {items.name}{" "}
                         {depthLevel > 0 ? <span>&raquo;</span> : <span className="arrow" />}
                     </Link>
-                    <Dropdown dropdown={dropdown} items={items} ref={ref} 
-                    onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave} setDropdown={setDropdown}/>
+                    <Dropdown dropdown={dropdown} items={items} setDropdown={setDropdown}/>
                 </>
             ) : (
                 <Link to='/'>{items.name}</Link>
