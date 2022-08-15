@@ -1,7 +1,6 @@
 import React, {useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import MenuItems from './MenuItems';
-import Modal from './Modal';
 import SubDropdown from './SubDropdown';
 
 const Dropdown = ({ items, dropdown, setDropdown, depthLevel }) => {
@@ -9,7 +8,6 @@ const Dropdown = ({ items, dropdown, setDropdown, depthLevel }) => {
 
     const [dir, setDir] = useState([]);
     const [secondDir, setSecondDir] = useState([]);
-    const [showModal, setShowModal] =useState(true);
     
     const url = '/fs?path=directory-1';
     const secondUrl = '/fs?path=directory-2';
@@ -60,13 +58,7 @@ const Dropdown = ({ items, dropdown, setDropdown, depthLevel }) => {
             }
             { items.name === "directory-2" &&
             secondDir.map(( submenu, j) => (
-                <>
-                <MenuItems items={submenu} key={j} onClick={() => showModal}/>
-                {showModal && (
-                    <Modal showModal={showModal} setShowModal={setShowModal}/>
-                )}
-                
-                </>
+                <MenuItems items={submenu} key={j} />
                 ))
             }
             </li>
