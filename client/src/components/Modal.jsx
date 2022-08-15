@@ -1,7 +1,7 @@
 import React, {useState, useEffect } from 'react';
 
 const Modal = ({showModal, setShowModal, secondDir }) => {
-    const showHideClassName = showModal ? "modal display-block" : "modal display-none";
+    const showHideClassName = !showModal ? "modal display-block" : "modal display-none";
 
     const [file, setFile] = useState([]);
     const fileUrl = '/fs?path=index.js';
